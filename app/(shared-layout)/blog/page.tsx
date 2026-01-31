@@ -8,8 +8,8 @@ import { cacheLife, cacheTag } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-// export const dynamic = "force-static";
-// export const revalidate = 30;
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Blog | Next 16 Tutorial",

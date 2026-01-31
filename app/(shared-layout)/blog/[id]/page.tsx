@@ -11,6 +11,8 @@ import { Metadata } from "next";
 import PostPresence from "@/components/web/PostPresence";
 import { redirect } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 interface PostIdRouteProps {
   params: Promise<{
     id: Id<"posts">;
