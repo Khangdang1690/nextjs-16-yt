@@ -1,0 +1,53 @@
+"use server";
+
+import { ConvexError } from "convex/values";
+import { postSchema } from "./schemas/blog";
+import { fetchAuthMutation } from "@/lib/auth-server";
+import { api } from "@/convex/_generated/api";
+import z from "zod";
+import { redirect } from "next/navigation";
+import { updateTag } from "next/cache";
+
+export async function createBlogAction(values: z.infer<typeof postSchema>) {
+  const parsed = postSchema.safeParse(values);
+
+  if (!parsed.success) {
+    throw new ConvexError("Something went wrong");
+  }
+
+  try {
+    const imageUrl = await fetchAuthMutation(
+      api.posts.generateImageUplpadUrl
+    )
+
+    const uploadResult = await fetch(imageUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": parsed.data.image.type
+      },
+      body: parsed.data.image,
+    });
+
+    if (!uploadResult.ok) {
+      return {
+        error: "Failed to upload image",
+      };
+    }
+
+    const { storageId } = await uploadResult.json();
+    await fetchAuthMutation(
+      api.posts.createPost, {
+        body: parsed.data.content,
+        title: parsed.data.title,
+        imageStorageId: storageId,
+      }
+    );
+  } catch {
+    return {
+      error: "Failed to create post",
+    }
+  }
+
+  updateTag("blog");
+  return redirect("/blog");
+}
