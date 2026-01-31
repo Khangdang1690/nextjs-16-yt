@@ -2,7 +2,7 @@
 
 A modern full-stack application built with Next.js 16, featuring real-time capabilities, authentication, and a beautiful UI.
 
-## Tech Stack
+## Tech Stack 
 
 ### Frontend
 - **[Next.js 16](https://nextjs.org)** - React framework with App Router
