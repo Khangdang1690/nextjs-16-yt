@@ -1,36 +1,150 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js 16 Tutorial Project
+
+A modern full-stack application built with Next.js 16, featuring real-time capabilities, authentication, and a beautiful UI.
+
+## Tech Stack
+
+### Frontend
+- **[Next.js 16](https://nextjs.org)** - React framework with App Router
+- **[React 19](https://react.dev)** - Latest React with Server Components
+- **[TypeScript](https://www.typescriptlang.org)** - Type-safe development
+- **[Tailwind CSS 4](https://tailwindcss.com)** - Utility-first CSS framework
+- **[Radix UI](https://www.radix-ui.com)** - Accessible component primitives
+- **[Lucide React](https://lucide.dev)** - Beautiful icon library
+- **[next-themes](https://github.com/pacocoursey/next-themes)** - Dark mode support
+
+### Backend & Database
+- **[Convex](https://convex.dev)** - Real-time backend-as-a-service
+- **[Better Auth](https://www.better-auth.com)** - Modern authentication solution
+- **[@convex-dev/presence](https://www.npmjs.com/package/@convex-dev/presence)** - Real-time user presence
+
+### Forms & Validation
+- **[React Hook Form](https://react-hook-form.com)** - Performant form handling
+- **[Zod](https://zod.dev)** - TypeScript-first schema validation
+
+## Features
+
+- Authentication with Better Auth
+- Real-time data synchronization with Convex
+- User presence tracking
+- Posts and comments system
+- Server Actions for data mutations
+- Dark mode support
+- Fully responsive design
+- Type-safe API with TypeScript
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+ installed
+- pnpm package manager (or npm/yarn/bun)
+- A Convex account ([Sign up free](https://convex.dev))
+
+### Installation
+
+1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url>
+cd nextjs-16-tutorial-yt
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Set up environment variables
+
+Create a [.env.local](.env.local) file in the root directory:
+
+```env
+# Add your environment variables here
+CONVEX_DEPLOYMENT=
+NEXT_PUBLIC_CONVEX_URL=
+```
+
+4. Run the development server
+
+```bash
+pnpm dev
+```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## Project Structure
+
+```
+nextjs-16-tutorial-yt/
+├── app/                      # Next.js App Router
+│   ├── (shared-layout)/     # Shared layout group
+│   ├── api/                 # API routes
+│   ├── auth/                # Authentication pages
+│   ├── schemas/             # Validation schemas
+│   ├── actions.ts           # Server Actions
+│   ├── layout.tsx           # Root layout
+│   └── globals.css          # Global styles
+├── components/              # Reusable UI components
+├── convex/                  # Convex backend
+│   ├── auth.ts             # Auth configuration
+│   ├── posts.ts            # Posts queries/mutations
+│   ├── comments.ts         # Comments queries/mutations
+│   ├── presence.ts         # Presence tracking
+│   └── schema.ts           # Database schema
+├── lib/                     # Utility functions
+└── public/                  # Static assets
+```
+
+## Available Scripts
+
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
+
+## Key Concepts
+
+### Convex Backend
+
+This project uses Convex as a real-time backend. Convex functions are defined in the [convex/](convex/) directory and automatically sync data to the frontend.
+
+### Server Actions
+
+Server Actions are used for data mutations, providing a type-safe way to handle form submissions and user interactions.
+
+### Real-time Presence
+
+User presence is tracked using [@convex-dev/presence](https://www.npmjs.com/package/@convex-dev/presence), showing who's currently online.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Convex Documentation](https://docs.convex.dev)
+- [Better Auth Documentation](https://www.better-auth.com/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Radix UI Documentation](https://www.radix-ui.com/docs)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Deploy to Vercel
 
-## Deploy on Vercel
+The easiest way to deploy this Next.js app is using [Vercel](https://vercel.com):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=your-repo-url)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Configure Convex
+
+1. Deploy your Convex backend:
+   ```bash
+   npx convex deploy
+   ```
+
+2. Add environment variables to your Vercel project with the Convex deployment URL
+
+See the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## License
+
+MIT
